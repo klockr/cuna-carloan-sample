@@ -12,3 +12,7 @@
   color: red;
   margin-left: 1em;
 }
+
+.password-field {
+  -Webkit-text-security: disc;
+}
