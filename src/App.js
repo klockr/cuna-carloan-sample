@@ -11,8 +11,26 @@ class App extends React.Component {
     this.state = {
       qualified: null,
       qualificationMessage: '',
+      accountCreated: false,
     }
+    this.submitLanding = this.submitLanding.bind(this);
+    this.submitNewAccount = this.submitNewAccount.bind(this);
   }
+
+  async submitLanding(values) {
+    console.log('submitted landing')
+    //const result = await fetchQualification(values);   
+    this.setState({
+      qualified: true,
+      qualificationMessage: 'Qualified',
+    });    
+  }
+
+  submitNewAccount(values) {
+    //TODO (future): Persist account info to storage
+    this.setState({accountCreated: true});
+  }
+
   render() {
     return (
       <BrowserRouter>
@@ -25,10 +43,10 @@ class App extends React.Component {
               <div className="Content">
                 <Route exact path="/" render={() => <Redirect to="/landing-page"/>}/>                                
                 <Route path="/landing-page" render={() => 
-                  <LandingForm />}
+                  <LandingForm onSubmit={this.submitLanding} qualified={this.state.qualified}/>}
                 />
                 <Route path="/new-account" render={() => 
-                  <NewAccountForm />}
+                  <NewAccountForm onSubmit={this.submitNewAccount} accountCreated={this.state.accountCreated}/>}
                 />                
                 <Route path="/disqualification" render={() => 
                   <DisqualificationPage />}
