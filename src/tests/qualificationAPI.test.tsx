@@ -26,11 +26,12 @@ test('QualificationAPI insufficient income for price is disqualified', async () 
     expect(result.qualification).toBe(false);
 })
 
-
-// test('QualificationAPI price is too high throws bad request', async () => {
-//     values.price = '9999999';
-//     expect(async () => {
-//         let result = await fetchQualification(values)
-//         console.log(result);
-//     }).toThrow('Bad Request')            
-// });
+test('QualificationAPI price is too high throws bad request', async () => {
+    values.price = '9999999';
+    try {
+        let result = await fetchQualification(values) 
+        expect(null).toBeTruthy();       
+    } catch (e) {        
+        expect(e).toBe('Bad Request');
+    }
+});
