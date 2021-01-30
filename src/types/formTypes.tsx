@@ -17,6 +17,7 @@ export type LandingFormProps = ILandingProps & InjectedFormProps<ILandingValues>
 export interface INewAccountValues {
     username: string;
     password: string;  
+    passwordVerify: string;
 }
 
 export interface INewAccountProps {

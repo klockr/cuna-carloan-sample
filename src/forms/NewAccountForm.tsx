@@ -8,7 +8,8 @@ export const validate = (values: INewAccountValues) => {
     const checkSpecial = /[*@!#%&()^~{}]+/.test(values.password);    
     const errors: INewAccountValues = {
       username: '',
-      password: '',      
+      password: '', 
+      passwordVerify: '',     
     };   
 
     if (!values.username) {
@@ -24,6 +25,9 @@ export const validate = (values: INewAccountValues) => {
     else if (values.password.length < 8 || (!checkNumber && !checkSpecial)) {
         errors.password = 'Password requires length greater than 8 and one special character or number'
     }
+    else if (values.passwordVerify !== values.password) {
+        errors.passwordVerify = 'Passwords do not match';
+    }
     return errors
 }
 
@@ -37,6 +41,9 @@ let NewAccountForm: React.FunctionComponent<NewAccountFormProps> = props => {
             </div>
             <div className="form-group">
                 <Field className='password-field' name="password" component={renderField} label="Password" />
+            </div>
+            <div className="form-group">
+                <Field className='password-field' name="passwordVerify" component={renderField} label="Verify Password" />
             </div>
             <div className="form-group">
                 <button type="submit" className="btn btn-primary">Submit</button>
