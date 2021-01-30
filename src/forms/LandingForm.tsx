@@ -4,7 +4,8 @@ import {renderField} from './common';
 import {ILandingValues, LandingFormProps} from '../types/formTypes';
 
 export const validate = (values: ILandingValues) => {
-    const currencyRegex =  /^[1-9]\d*(((,\d{3}){1})?(\.\d{0,2})?)$/;;
+    const currencyRegex =  /^[1-9]\d*(((,\d{3}){1})?(\.\d{0,2})?)$/;
+    const integerRegex = /^-?\d+$/;
     const errors: ILandingValues = {
         price: '',
         make: '',
@@ -44,7 +45,7 @@ export const validate = (values: ILandingValues) => {
     if (!values.credit) {
         errors.credit = 'Required'
     }
-    else if (isNaN(parseInt(values.credit))) {
+    else if (!integerRegex.test(values.credit)) {
         errors.credit = 'Credit must be a valid integer'
     }
     else if (parseInt(values.credit) < 350 || parseInt(values.credit) > 800) {
