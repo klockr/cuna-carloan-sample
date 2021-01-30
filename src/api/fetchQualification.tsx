@@ -17,16 +17,13 @@ export const fetchQualification = async (values: ILandingValues) => {
     const credit = parseInt(values.credit);    
     return new Promise<IQualificationResult>((resolve, reject) => {        
         
-        if (price > 1000000) {
-            console.log('price too high')
+        if (price > 1000000) {            
             reject("Bad Request")
         }        
-        if (price > (income / 5) || credit < 600) {
-            console.log("income/credit insufficient")
+        if (price > (income / 5) || credit < 600) {            
             result.message = disqualificationMessage;
             resolve(result);
-        }        
-        console.log('qualified!')
+        }                
         result.qualification = true;
         result.message = 'Successfully qualified';
         resolve(result);

@@ -5,7 +5,8 @@ import {INewAccountValues, NewAccountFormProps} from '../types/formTypes';
 export const validate = (values: INewAccountValues) => {
     const emailRegex =  /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
     const checkNumber = /[0-9]+/.test(values.password);
-    const checkSpecial = /[*@!#%&()^~{}]+/.test(values.password);    
+    //Special characters defined by OWASP https://owasp.org/www-community/password-special-characters
+    const checkSpecial = /[!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~]+/.test(values.password);    
     const errors: INewAccountValues = {
       username: '',
       password: '', 
@@ -15,7 +16,7 @@ export const validate = (values: INewAccountValues) => {
     if (!values.username) {
       errors.username = 'Required'
     }        
-    if (!emailRegex.test(values.username)) {
+    else if (!emailRegex.test(values.username)) {
         errors.username = 'Username must be a valid email address'
     }
     
@@ -24,6 +25,10 @@ export const validate = (values: INewAccountValues) => {
     }            
     else if (values.password.length < 8 || (!checkNumber && !checkSpecial)) {
         errors.password = 'Password requires length greater than 8 and one special character or number'
+    }
+
+    if (!values.passwordVerify) {
+        errors.passwordVerify = 'Required';
     }
     else if (values.passwordVerify !== values.password) {
         errors.passwordVerify = 'Passwords do not match';
