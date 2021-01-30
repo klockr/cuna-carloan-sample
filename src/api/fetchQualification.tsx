@@ -11,21 +11,30 @@ export const fetchQualification = async (values: ILandingValues) => {
         qualification: false,
         message: '',
     }
-
     const income = currencyToNumber(values.income);
     const price = currencyToNumber(values.price);
-    const credit = parseInt(values.credit);    
+    const credit = parseInt(values.credit);        
+    
     return new Promise<IQualificationResult>((resolve, reject) => {        
         
         if (price > 1000000) {            
             reject("Bad Request")
         }        
-        if (price > (income / 5) || credit < 600) {            
-            result.message = disqualificationMessage;
+
+        if (credit < 600) {            
+            result.qualification = false;         
+            result.message = 'CREDIT TOO LOW: '+disqualificationMessage;
+            resolve(result);
+        }
+        else if (price > (income / 5)) {   
+            result.qualification = false;         
+            result.message = 'INCOME INSUFFICIENT: '+disqualificationMessage;
             resolve(result);
         }                
-        result.qualification = true;
-        result.message = 'Successfully qualified';
-        resolve(result);
+        else {
+            result.qualification = true;
+            result.message = 'Successfully qualified';
+            resolve(result);
+        }
     });
 }

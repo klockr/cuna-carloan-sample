@@ -4,6 +4,13 @@ Richard Klockowski
 1/29/2021
 
 ## Build Instructions 
+`npm install` - install project dependencies (specified in package-lock.json)
+
+`npm start` - run application locally with node
+
+`npm test` - run unit tests
+
+`npm run build` - create minified build artifacts into 'build' folder
 
 ## Technologies
 The primary tools you'll be expected to use at this job are modern React/Redux with Typescript.
@@ -39,15 +46,18 @@ for any auto purchase price above $1,000,000.
 If the api call does not return a disqualification message(see below), this page 
 should have a simple account creation form including:
 
-  Username (Text)
-  Password (Text)
+- Username (Text) - valid email
 
-The username should be validated as an email and password should require more than 8
-characters and a number or special character. Ensure the user types their password
-twice to validate their intent.
+- Password (Text) - more than 8 characters and a number OR special character
+
+- PasswordVerify (Text) - must be equal to Password field
+
+Password and PasswordVerify field should be hidden as the user types into the field.
+
+Display a "success" message when the account is successfully created.
 
 ### **Disqualification Page:**
 - Display a simple page with the disqualification message that comes from
 the api call.
 - Display fake information to get in contact with a customer service.
-- There should be no further way to get off this page or re-enter the information.
+- There should be no further way to get off this page or re-enter the information. 

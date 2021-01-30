@@ -1,5 +1,5 @@
 import {validate as landingValidate} from '../forms/LandingForm';
-import { ILandingValues } from '../types/formTypes';
+import {ILandingValues} from '../types/formTypes';
 
 const values: ILandingValues = {
     price: '',
@@ -55,7 +55,6 @@ test('LandingForm income valid currency is OK', () => {
     expect(errors.income).toBe('');
 });
 
-//TODO: Fix this bug
 test('LandingForm credit cannot be non-integer', () => {
     values.credit='123.12';
     errors = landingValidate(values);
