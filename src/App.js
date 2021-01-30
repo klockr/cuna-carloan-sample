@@ -3,6 +3,7 @@ import {Switch, Route, Redirect, BrowserRouter} from 'react-router-dom'
 import LandingForm from './forms/LandingForm';
 import NewAccountForm from './forms/NewAccountForm';
 import DisqualificationPage from './pages/DisqualificationPage';
+import {fetchQualification} from './api/fetchQualification';
 import './App.css';
 
 class App extends React.Component {
@@ -17,12 +18,11 @@ class App extends React.Component {
     this.submitNewAccount = this.submitNewAccount.bind(this);
   }
 
-  async submitLanding(values) {
-    console.log('submitted landing')
-    //const result = await fetchQualification(values);   
+  async submitLanding(values) {    
+    const result = await fetchQualification(values);   
     this.setState({
-      qualified: true,
-      qualificationMessage: 'Qualified',
+      qualified: result.qualification,
+      qualificationMessage: result.message,
     });    
   }
 
@@ -49,7 +49,7 @@ class App extends React.Component {
                   <NewAccountForm onSubmit={this.submitNewAccount} accountCreated={this.state.accountCreated}/>}
                 />                
                 <Route path="/disqualification" render={() => 
-                  <DisqualificationPage />}
+                  <DisqualificationPage message={this.state.qualificationMessage}/>}
                 />
               </div>              
             </div>    
@@ -59,5 +59,4 @@ class App extends React.Component {
     );
   } 
 }
-
 export default App;

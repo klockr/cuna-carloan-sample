@@ -28,7 +28,7 @@ export const validate = (values: INewAccountValues) => {
 }
 
 let NewAccountForm: React.FunctionComponent<NewAccountFormProps> = props => {  
-    const {handleSubmit} = props;  
+    const {handleSubmit, accountCreated} = props;  
     return (
         <form onSubmit={handleSubmit} className="new-account-form">
             <p>Congratulations, you have qualified for a loan!  Please create an account to continue.</p>
@@ -41,6 +41,7 @@ let NewAccountForm: React.FunctionComponent<NewAccountFormProps> = props => {
             <div className="form-group">
                 <button type="submit" className="btn btn-primary">Submit</button>
             </div>  
+            {accountCreated ? <div className='account-created-message'>Account Created!</div> : null }
         </form>
     )
 }

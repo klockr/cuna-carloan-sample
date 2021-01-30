@@ -21,6 +21,16 @@ export interface INewAccountValues {
 
 export interface INewAccountProps {
     handleSubmit: (values: INewAccountValues) => void;
+    accountCreated: boolean;
 }
 
 export type NewAccountFormProps = INewAccountProps & InjectedFormProps<INewAccountValues>;
+
+export interface IQualificationResult {
+    qualification: boolean;
+    message: string;
+}
+
+export interface IQualificationProps {    
+    message: boolean;
+}
